@@ -106,16 +106,42 @@ def update_student():
     for student in students:
         if student["id"] == update_id:
             print("\nStudent Found!")
-            print("Enter new details:")
 
-            student["name"] = input("Enter new name: ")
-            student["age"] = int(input("Enter new age: "))
-            student["course"] = input("Enter new course: ")
-            student["email"] = input("Enter new email: ")
+            while True:
+                print("\n1. Update Name")
+                print("2. Update Age")
+                print("3. Update Course")
+                print("4. Update Email")
+                print("5. Back")
 
-            save_records()
+                choice = input("Enter your choice: ")
 
-            print("\nStudent updated successfully!")
+                if choice == "1":
+                    student["name"] = input("Enter new name: ")
+                    save_records()
+                    print("Name updated successfully!")
+
+                elif choice == "2":
+                    student["age"] = int(input("Enter new age: "))
+                    save_records()
+                    print("Age updated successfully!")
+
+                elif choice == "3":
+                    student["course"] = input("Enter new course: ")
+                    save_records()
+                    print("Course updated successfully!")
+
+                elif choice == "4":
+                    student["email"] = input("Enter new email: ")
+                    save_records()
+                    print("Email updated successfully!")
+
+                elif choice == "5":
+                    break
+
+                else:
+                    print("Invalid choice. Please try again.")
+
             return
 
     print("\nStudent not found.")
