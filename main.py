@@ -154,14 +154,27 @@ def delete_student():
 
     for student in students:
         if student["id"] == delete_id:
-            students.remove(student)
-            save_records()
+            print("\nStudent Found!")
+            print("ID:", student["id"])
+            print("Name:", student["name"])
+            print("Age:", student["age"])
+            print("Course:", student["course"])
+            print("Email:", student["email"])
 
-            print("\nStudent deleted successfully!")
+            confirmation = input("\nAre you sure you want to delete this student? (y/n): ")
+
+            if confirmation.lower() == "y":
+                students.remove(student)
+                save_records()
+
+                print("\nStudent deleted successfully!")
+
+            else:
+                print("\nDelete cancelled.")
+
             return
 
     print("\nStudent not found.")
-
 
 def main():
     while True:
