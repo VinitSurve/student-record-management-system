@@ -2,27 +2,35 @@ import json
 
 students = []
 
+
 def load_records():
     global students
 
     try:
         with open("students.json", "r") as file:
-            student = json.load(file)
+            students = json.load(file)
+
     except FileNotFoundError:
         students = []
+
+
+def save_records():
+    with open("students.json", "w") as file:
+        json.dump(students, file, indent=4)
 
 
 def display_menu():
     print("\n========================================")
     print("       STUDENT RECORD MANAGEMENT")
-    print("==========================================")
+    print("========================================")
     print("1. Add Student")
     print("2. View All Students")
     print("3. Search Student")
     print("4. Update Student")
     print("5. Delete Student")
     print("6. Exit")
-    print("==========================================")
+    print("========================================")
+
 
 def add_student():
     print("\n---------- Add Student ----------")
@@ -33,7 +41,6 @@ def add_student():
     course = input("Enter Course: ")
     email = input("Enter Email: ")
 
-
     student = {
         "id": student_id,
         "name": name,
@@ -43,23 +50,26 @@ def add_student():
     }
 
     students.append(student)
+    save_records()
 
     print("\nStudent added successfully!")
+
 
 def view_students():
     print("\n---------- Student Records ----------")
 
     if len(students) == 0:
-        print("No student record found!")
+        print("No student records found.")
         return
-    
+
     for student in students:
-        print("Student ID: ", student["id"])
-        print("Name: ", student["name"])
-        print("Age: ", student["age"])
-        print("Course: ", student["course"])
-        print("Email: ", student["email"])
-        print("------------------------------------")
+        print("\nID:", student["id"])
+        print("Name:", student["name"])
+        print("Age:", student["age"])
+        print("Course:", student["course"])
+        print("Email:", student["email"])
+        print("--------------------------------------")
+
 
 def search_student():
     print("\n---------- Search Student ----------")
@@ -68,16 +78,16 @@ def search_student():
 
     for student in students:
         if student["id"] == search_id:
-            print("Student Found!")
-            print("Student ID: ", student["id"])
-            print("Name: ", student["name"])
-            print("Age: ", student["age"])
-            print("Course: ", student["course"])
-            print("Email: ", student["email"])
-            print("------------------------------------")
+            print("\nStudent Found!")
+            print("ID:", student["id"])
+            print("Name:", student["name"])
+            print("Age:", student["age"])
+            print("Course:", student["course"])
+            print("Email:", student["email"])
             return
-    
-    print("Student not found!")
+
+    print("\nStudent not found.")
+
 
 def update_student():
     print("\n---------- Update Student ----------")
@@ -86,18 +96,21 @@ def update_student():
 
     for student in students:
         if student["id"] == update_id:
-            print("Student Found!")
-            print("Enter New Details: ")
+            print("\nStudent Found!")
+            print("Enter new details:")
 
-            print("Student ID: ", student["id"])
-            print("Name: ", student["name"])
-            print("Age: ", student["age"])
-            print("Course: ", student["course"])
-            print("Email: ", student["email"])
-            print("------------------------------------")
+            student["name"] = input("Enter new name: ")
+            student["age"] = int(input("Enter new age: "))
+            student["course"] = input("Enter new course: ")
+            student["email"] = input("Enter new email: ")
+
+            save_records()
+
+            print("\nStudent updated successfully!")
             return
-    
-    print("Student not found!")
+
+    print("\nStudent not found.")
+
 
 def delete_student():
     print("\n---------- Delete Student ----------")
@@ -107,30 +120,42 @@ def delete_student():
     for student in students:
         if student["id"] == delete_id:
             students.remove(student)
+            save_records()
+
             print("\nStudent deleted successfully!")
             return
 
     print("\nStudent not found.")
-    
+
 
 def main():
     while True:
         display_menu()
-        choice = input("Enter you choice: ")
+
+        choice = input("Enter your choice: ")
+
         if choice == "1":
             add_student()
+
         elif choice == "2":
             view_students()
+
         elif choice == "3":
             search_student()
+
         elif choice == "4":
             update_student()
+
         elif choice == "5":
             delete_student()
-        elif choice == "6":
-            print("Exit")
-            break
-        else:
-            print("Invalid choice. Please try again!")
 
+        elif choice == "6":
+            print("Thank you for using Student Record Management System.")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+
+load_records()
 main()
