@@ -18,6 +18,12 @@ def save_records():
     with open("students.json", "w") as file:
         json.dump(students, file, indent=4)
 
+def get_next_student_id():
+    if len(students) == 0:
+        return int(input("Enter starting Student ID: "))
+
+    return max(student["id"] for student in students) + 1
+
 
 def display_menu():
     print("\n========================================")
@@ -35,7 +41,10 @@ def display_menu():
 def add_student():
     print("\n---------- Add Student ----------")
 
-    student_id = int(input("Enter Student ID: "))
+    student_id = get_next_student_id()
+
+    print("Student ID:", student_id)
+
     name = input("Enter Student Name: ")
     age = int(input("Enter Student Age: "))
     course = input("Enter Course: ")
