@@ -1,4 +1,16 @@
+import json
+
 students = []
+
+def load_records():
+    global students
+
+    try:
+        with open("students.json", "r") as file:
+            student = json.load(file)
+    except FileNotFoundError:
+        students = []
+
 
 def display_menu():
     print("\n========================================")
