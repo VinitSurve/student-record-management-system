@@ -4,20 +4,13 @@
         "name": "Vinit Surve",
         "age": 21,
         "course": "MCA",
-        "email": "mca2026.vinits@isu.ac.in"
+        "email": "vinit@gmail.com"
     },
     {
-        "id": 3,
-        "name": "Sumeet Ghadge",
+        "id": 2,
+        "name": "Narayan Yadav",
         "age": 22,
         "course": "MCA",
-        "email": "test@gmail.com"
-    },
-    {
-        "id": 4,
-        "name": "Swara",
-        "age": 22,
-        "course": "MBA",
-        "email": "test@gmail.com"
+        "email": "narayan@gmail.com"
     }
 ]
